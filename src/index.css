@@ -85,6 +85,30 @@ img {
   width: 100%;
 }
 
+h1 {
+  font-size: 3.2rem;
+}
+
+h2 {
+  font-size: 2.4rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.6rem;
+}
+
+h5 {
+  font-size: 1.3rem;
+}
+
+h6 {
+  font-size: 1.1rem;
+}
+
 h1,
 h2,
 h3,
@@ -92,51 +116,15 @@ h4 {
   font-family: var(--primary-font);
   line-height: 1.25;
   letter-spacing: var(--spacing);
-  margin-bottom: 1.6rem;
-}
-
-h1 {
-  font-size: 3rem;
-}
-
-h2 {
-  font-size: 2rem;
-}
-
-h3 {
-  font-size: 1.25rem;
-}
-
-h4 {
-  font-size: 0.875rem;
+  margin-bottom: 1.8rem;
 }
 
 p {
   color: var(--color-grey-5);
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.4rem;
 }
 
 @media screen and (min-width: 800px) {
-  h1 {
-    font-size: 4rem;
-  }
-
-  h2 {
-    font-size: 2.5rem;
-  }
-
-  h3 {
-    font-size: 1.75rem;
-  }
-
-  h4 {
-    font-size: 1rem;
-  }
-
-  body {
-    font-size: 1rem;
-  }
-
   h1,
   h2,
   h3,
@@ -193,8 +181,4 @@ p {
   height: 20rem;
   margin: 0 auto;
   margin-top: 10rem;
-}
-
-main {
-  padding-bottom: 2rem;
 }

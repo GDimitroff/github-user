@@ -1,44 +1,96 @@
 import styled from 'styled-components';
+import axios from 'axios';
 import { GoRepo, GoGist } from 'react-icons/go';
 import { FiUsers, FiUserPlus } from 'react-icons/fi';
 
 import { useGitHub } from '../contexts/GithubContext';
 
 const UserInfo = () => {
-  const data = useGitHub();
-  console.log(data);
+  const { githubUser } = useGitHub();
+  const { public_repos, followers, following, public_gists } = githubUser;
 
-  return <h2>user info component : {data}</h2>;
+  const items = [
+    {
+      id: 1,
+      icon: <GoRepo className="icon" />,
+      label: 'Repos',
+      value: public_repos,
+      color: 'pink',
+    },
+    {
+      id: 2,
+      icon: <FiUsers className="icon" />,
+      label: 'Followers',
+      value: followers,
+      color: 'green',
+    },
+    {
+      id: 3,
+      icon: <FiUserPlus className="icon" />,
+      label: 'Following',
+      value: following,
+      color: 'purple',
+    },
+    {
+      id: 4,
+      icon: <GoGist className="icon" />,
+      label: 'Gists',
+      value: public_gists,
+      color: 'yellow',
+    },
+  ];
+
+  return (
+    <section className="section">
+      <Wrapper className="section-center">
+        {items.map((item) => {
+          return <Item key={item.id} {...item} />;
+        })}
+      </Wrapper>
+    </section>
+  );
+};
+
+const Item = ({ icon, label, value, color }) => {
+  return (
+    <article className="item">
+      <span className={color}>{icon}</span>
+      <div>
+        <h3>{value}</h3>
+        <p>{label}</p>
+      </div>
+    </article>
+  );
 };
 
 const Wrapper = styled.section`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem 2rem;
+  gap: 2rem 3rem;
 
   @media (min-width: 640px) {
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   }
 
   .item {
-    border-radius: var(--radius);
-    padding: 1rem 2rem;
-    background: var(--color-white);
     display: grid;
     grid-template-columns: auto 1fr;
-    column-gap: 3rem;
     align-items: center;
+    column-gap: 4rem;
+    padding: 2rem 3rem;
+    border-radius: var(--radius);
+    background: var(--color-white);
 
     span {
-      width: 3rem;
-      height: 3rem;
+      width: 5rem;
+      height: 5rem;
       display: grid;
       place-items: center;
       border-radius: 50%;
     }
 
     .icon {
-      font-size: 1.5rem;
+      font-size: 2.6rem;
     }
 
     h3 {
@@ -47,8 +99,8 @@ const Wrapper = styled.section`
     }
 
     p {
+      font-size: 1.4rem;
       margin-bottom: 0;
-      text-transform: capitalize;
     }
 
     .pink {
