@@ -1,7 +1,13 @@
+import { Info, Repos, User, Search, Navbar } from '../components';
+
 const Dashboard = () => {
   return (
     <main>
-      <h2>Dashboard Page</h2>
+      <Navbar></Navbar>
+      <Search></Search>
+      <Info></Info>
+      <User></User>
+      <Repos></Repos>
     </main>
   );
 };
