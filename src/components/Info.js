@@ -90,17 +90,12 @@ const Wrapper = styled.section`
     }
 
     .icon {
-      font-size: 2.6rem;
+      font-size: 2.4rem;
     }
 
     h3 {
       margin-bottom: 0;
       letter-spacing: 0;
-    }
-
-    p {
-      font-size: 1.4rem;
-      margin-bottom: 0;
     }
 
     .pink {

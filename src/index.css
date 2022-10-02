@@ -121,7 +121,7 @@ h4 {
 
 p {
   color: var(--color-grey-5);
-  margin-bottom: 1.4rem;
+  font-size: 1.4rem;
 }
 
 @media screen and (min-width: 800px) {
@@ -160,7 +160,7 @@ p {
 
 .section {
   position: relative;
-  padding: 1rem 0;
+  padding: 2rem 0;
 }
 
 .section-center {

@@ -1,12 +1,52 @@
 import styled from 'styled-components';
 import { MdBusiness, MdLocationOn, MdLink } from 'react-icons/md';
+import { useGitHub } from '../contexts/GithubContext';
 
 const Card = () => {
-  return <h2>card component</h2>;
+  const { githubUser } = useGitHub();
+  const {
+    avatar_url,
+    html_url,
+    name,
+    company,
+    blog,
+    bio,
+    location,
+    twitter_username,
+  } = githubUser;
+
+  return (
+    <Wrapper>
+      <header>
+        <img src={avatar_url} alt={name} />
+        <div>
+          <h4>{name}</h4>
+          <p>@{twitter_username || 'john doe'}</p>
+        </div>
+        <a href={html_url}>Follow</a>
+      </header>
+      <p className="bio">{bio}</p>
+      <div className="links">
+        <p>
+          <MdBusiness />
+          {company}
+        </p>
+        <p>
+          <MdLocationOn />
+          {location || 'Earth'}
+        </p>
+        <a href={`https://${blog}`}>
+          <MdLink />
+          {blog}
+        </a>
+      </div>
+    </Wrapper>
+  );
 };
+
 const Wrapper = styled.article`
   background: var(--color-white);
-  padding: 1.5rem 2rem;
+  padding: 2.4rem 3.2rem;
   border-top-right-radius: var(--radius);
   border-bottom-left-radius: var(--radius);
   border-bottom-right-radius: var(--radius);
@@ -23,17 +63,17 @@ const Wrapper = styled.article`
     border-top-right-radius: var(--radius);
     border-top-left-radius: var(--radius);
     text-transform: capitalize;
-    padding: 0.5rem 1rem 0 1rem;
+    padding: 0.8rem 1.6rem 0.4rem 1.6rem;
     letter-spacing: var(--spacing);
-    font-size: 1rem;
+    font-size: 1.4rem;
   }
 
   header {
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
-    column-gap: 1rem;
-    margin-bottom: 1rem;
+    column-gap: 1.4rem;
+    margin-bottom: 1.6rem;
 
     img {
       width: 75px;
@@ -45,15 +85,11 @@ const Wrapper = styled.article`
       margin-bottom: 0.25rem;
     }
 
-    p {
-      margin-bottom: 0;
-    }
-
     a {
       color: var(--color-primary-5);
       border: 1px solid var(--color-primary-5);
-      padding: 0.25rem 0.75rem;
-      border-radius: 1rem;
+      padding: 0.4rem 1.4rem;
+      border-radius: 2rem;
       text-transform: capitalize;
       letter-spacing: var(--spacing);
       transition: var(--transition);
@@ -73,13 +109,13 @@ const Wrapper = styled.article`
   .links {
     p,
     a {
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.4rem;
       display: flex;
       align-items: center;
 
       svg {
-        margin-right: 0.5rem;
-        font-size: 1.3rem;
+        margin-right: 0.6rem;
+        font-size: 1.6rem;
       }
     }
 
