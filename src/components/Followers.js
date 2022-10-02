@@ -1,7 +1,27 @@
 import styled from 'styled-components';
+import { useGitHub } from '../contexts/GithubContext';
 
 const Followers = () => {
-  return <h2>followers component</h2>;
+  const { followers } = useGitHub();
+
+  return (
+    <Wrapper>
+      <div className="followers">
+        {followers.map((follower, index) => {
+          const { avatar_url: img, html_url, login } = follower;
+          return (
+            <article key={index}>
+              <img src={img} alt={login} />
+              <div>
+                <h4>{login}</h4>
+                <a href={html_url}>{html_url}</a>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.article`
@@ -22,23 +42,23 @@ const Wrapper = styled.article`
     border-top-right-radius: var(--radius);
     border-top-left-radius: var(--radius);
     text-transform: capitalize;
-    padding: 0.5rem 1rem 0 1rem;
+    padding: 0.6rem 1.2rem 0.2rem 1.2rem;
     letter-spacing: var(--spacing);
-    font-size: 1rem;
+    font-size: 1.4rem;
   }
 
   .followers {
-    overflow: scroll;
-    height: 260px;
+    height: 240px;
     display: grid;
     grid-template-rows: repeat(auto-fill, minmax(45px, 1fr));
-    gap: 1.25rem 1rem;
-    padding: 1rem 2rem;
+    gap: 1.2rem;
+    padding: 2rem;
+    overflow-y: scroll;
   }
 
   article {
     transition: var(--transition);
-    padding: 0.15rem 0.5rem;
+    padding: 0.4rem 0.8rem;
     border-radius: var(--radius);
     display: grid;
     grid-template-columns: auto 1fr;
@@ -58,6 +78,7 @@ const Wrapper = styled.article`
 
     a {
       color: var(--color-grey-5);
+      font-size: 1.4rem;
     }
   }
 `;

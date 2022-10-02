@@ -63,14 +63,14 @@ const Wrapper = styled.article`
     border-top-right-radius: var(--radius);
     border-top-left-radius: var(--radius);
     text-transform: capitalize;
-    padding: 0.8rem 1.6rem 0.4rem 1.6rem;
+    padding: 0.6rem 1.2rem 0.2rem 1.2rem;
     letter-spacing: var(--spacing);
     font-size: 1.4rem;
   }
 
   header {
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto 1fr;
     align-items: center;
     column-gap: 1.4rem;
     margin-bottom: 1.6rem;
@@ -89,6 +89,7 @@ const Wrapper = styled.article`
       color: var(--color-primary-5);
       border: 1px solid var(--color-primary-5);
       padding: 0.4rem 1.4rem;
+      margin-top: 1rem;
       border-radius: 2rem;
       text-transform: capitalize;
       letter-spacing: var(--spacing);
@@ -98,6 +99,16 @@ const Wrapper = styled.article`
       &:hover {
         background: var(--color-primary-5);
         color: var(--color-white);
+      }
+    }
+  }
+
+  @media (min-width: 440px) {
+    header {
+      grid-template-columns: auto 1fr auto;
+
+      a {
+        margin-top: 0;
       }
     }
   }
