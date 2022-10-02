@@ -26,11 +26,11 @@ const Wrapper = styled.section`
   }
 
   img {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
   }
 
   h1 {
-    margin-bottom: 1.8rem;
+    margin-bottom: 2rem;
   }
 `;
 

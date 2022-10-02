@@ -2,8 +2,13 @@ import styled from 'styled-components';
 import { GoRepo, GoGist } from 'react-icons/go';
 import { FiUsers, FiUserPlus } from 'react-icons/fi';
 
+import { useGitHub } from '../contexts/GithubContext';
+
 const UserInfo = () => {
-  return <h2>user info component</h2>;
+  const data = useGitHub();
+  console.log(data);
+
+  return <h2>user info component : {data}</h2>;
 };
 
 const Wrapper = styled.section`

@@ -23,12 +23,12 @@ const Wrapper = styled.section`
   text-align: center;
 
   h1 {
-    font-size: 12rem;
+    font-size: 16rem;
   }
 
   h3 {
     color: var(--color-grey-3);
-    margin-bottom: 2.6rem;
+    margin-bottom: 3.6rem;
   }
 `;
 
