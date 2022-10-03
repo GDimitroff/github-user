@@ -1,14 +1,43 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { MdSearch } from 'react-icons/md';
 
 const Search = () => {
-  return <h2>search component</h2>;
+  const [user, setUser] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (user) {
+      console.log('user');
+    }
+  };
+
+  return (
+    <section className="section">
+      <Wrapper className="section-center">
+        <form onSubmit={handleSubmit}>
+          <div className="form-control">
+            <MdSearch />
+            <input
+              type="text"
+              placeholder="Enter GitHub user..."
+              value={user}
+              onChange={(e) => setUser(e.target.value)}
+            />
+            <button type="submit">Search</button>
+          </div>
+        </form>
+        <h3>Request: 60 / 60</h3>
+      </Wrapper>
+    </section>
+  );
 };
 
 const Wrapper = styled.div`
   position: relative;
   display: grid;
-  gap: 1rem 1.75rem;
+  gap: 3rem;
 
   @media (min-width: 768px) {
     grid-template-columns: 1fr max-content;
@@ -24,29 +53,29 @@ const Wrapper = styled.div`
     display: grid;
     align-items: center;
     grid-template-columns: auto 1fr auto;
-    column-gap: 0.5rem;
-    border-radius: 5px;
-    padding: 0.5rem;
+    column-gap: 0.8rem;
+    border-radius: 6px;
+    padding: 0.8rem;
 
     input {
+      font-family: inherit;
       border-color: transparent;
       outline-color: var(--color-grey-10);
       letter-spacing: var(--spacing);
       color: var(--color-grey-3);
-      padding: 0.25rem 0.5rem;
+      padding: 0.4rem 0.8rem;
     }
 
     input::placeholder {
+      font-family: inherit;
       color: var(--color-grey-3);
-      text-transform: capitalize;
       letter-spacing: var(--spacing);
     }
 
     button {
-      border-radius: 5px;
+      border-radius: 6px;
       border-color: transparent;
-      padding: 0.25rem 0.5rem;
-      text-transform: capitalize;
+      padding: 0.4rem 0.8rem;
       letter-spacing: var(--spacing);
       background: var(--color-primary-5);
       color: var(--color-white);
@@ -66,22 +95,22 @@ const Wrapper = styled.div`
     input,
     button,
     svg {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
     }
 
     @media (max-width: 800px) {
       button,
       input,
       svg {
-        font-size: 0.85rem;
+        font-size: 1.2rem;
       }
     }
   }
 
   h3 {
+    font-weight: 400;
     margin-bottom: 0;
     color: var(--color-grey-5);
-    font-weight: 400;
   }
 `;
 

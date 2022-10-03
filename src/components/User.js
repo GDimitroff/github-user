@@ -17,13 +17,12 @@ const User = () => {
 const Wrapper = styled.div`
   padding-top: 2rem;
   display: grid;
-  gap: 6rem;
+  gap: 4rem;
 
   @media (min-width: 992px) {
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
   }
-  /* align-items: start; */
 `;
 
 export default User;

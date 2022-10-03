@@ -66,7 +66,7 @@ const Item = ({ icon, label, value, color }) => {
 const Wrapper = styled.section`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 2rem 3rem;
+  gap: 3rem;
 
   @media (min-width: 640px) {
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
