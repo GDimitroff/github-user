@@ -8,15 +8,17 @@ ReactFC.fcRoot(FusionCharts, Chart, FusionTheme);
 const Pie3D = ({ data }) => {
   const chartConfigs = {
     type: 'pie3d',
-    width: '400',
+    width: '100%',
     height: '400',
     dataFormat: 'json',
     dataSource: {
       chart: {
         caption: 'Languages',
+        subCaption: 'Most Used Languages',
         theme: 'fusion',
         decimals: 0,
         pieRadius: '45%',
+        useDataPlotColorForLabels: '1',
       },
       data,
     },
