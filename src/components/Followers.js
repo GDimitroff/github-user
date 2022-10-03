@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { useGitHub } from '../contexts/GithubContext';
 
 const Followers = () => {

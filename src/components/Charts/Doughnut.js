@@ -3,6 +3,8 @@ import FusionCharts from 'fusioncharts';
 import Chart from 'fusioncharts/fusioncharts.charts';
 import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion';
 
+ReactFC.fcRoot(FusionCharts, Chart, FusionTheme);
+
 const ChartComponent = ({ data }) => {
   const chartConfigs = {
     type: 'doughnut2d',
@@ -32,6 +34,10 @@ const ChartComponent = ({ data }) => {
         useDataPlotColorForLabels: 0,
         bgColor: '#FFFFFF',
         showBorder: 0,
+        chartLeftMargin: '40',
+        chartTopMargin: '40',
+        chartRightMargin: '40',
+        chartBottomMargin: '40',
       },
       data,
     },

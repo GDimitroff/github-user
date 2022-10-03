@@ -1,7 +1,7 @@
 import styled from 'styled-components';
+
 import { useGitHub } from '../contexts/GithubContext';
-import Pie from './Charts/Pie';
-import Doughnut from './Charts/Doughnut';
+import { Column, Pie, Doughnut, Bar } from './Charts';
 
 const Repos = () => {
   const { repos } = useGitHub();
@@ -35,13 +35,31 @@ const Repos = () => {
     })
     .slice(0, 5);
 
+  let { stars, forks } = repos.reduce(
+    (total, item) => {
+      const { stargazers_count, name, forks } = item;
+      total.stars[name] = { label: name, value: stargazers_count };
+      total.forks[name] = { label: name, value: forks };
+      return total;
+    },
+    { stars: {}, forks: {} }
+  );
+
+  stars = Object.values(stars)
+    .sort((a, b) => b.value - a.value)
+    .slice(0, 5);
+
+  forks = Object.values(forks)
+    .sort((a, b) => b.value - a.value)
+    .slice(0, 5);
+
   return (
     <section className="section">
       <Wrapper className="section-center ">
         <Pie data={mostUsed} />
-        <div></div>
+        <Column data={stars} />
         <Doughnut data={mostPopular} />
-        <div></div>
+        <Bar data={forks} />
       </Wrapper>
     </section>
   );
@@ -50,7 +68,7 @@ const Repos = () => {
 const Wrapper = styled.div`
   display: grid;
   justify-items: center;
-  gap: 2rem;
+  gap: 3rem;
 
   @media (min-width: 800px) {
     grid-template-columns: 1fr 1fr;
