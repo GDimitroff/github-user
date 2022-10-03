@@ -70,6 +70,16 @@ body {
   line-height: 1.5;
   color: var(--color-grey-1);
   background: var(--color-grey-10);
+
+  /* Hide scrollbar but still be able to scroll */
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 ul {
@@ -175,10 +185,13 @@ p {
   }
 }
 
-.loading-img {
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
   display: block;
-  width: 20rem;
-  height: 20rem;
-  margin: 0 auto;
-  margin-top: 10rem;
+  width: 16rem;
+  height: 16rem;
 }

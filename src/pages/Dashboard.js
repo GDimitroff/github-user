@@ -1,13 +1,26 @@
+import { useGitHub } from '../contexts/GithubContext';
 import { Info, Repos, User, Search, Navbar } from '../components';
+import loadingImage from '../images/preloader.gif';
 
 const Dashboard = () => {
+  const { isLoading } = useGitHub();
+
+  if (isLoading) {
+    return (
+      <main>
+        <Navbar />
+        <img src={loadingImage} alt="Loading" className="loading" />
+      </main>
+    );
+  }
+
   return (
     <main>
-      <Navbar></Navbar>
-      <Search></Search>
-      <Info></Info>
-      <User></User>
-      <Repos></Repos>
+      <Navbar />
+      <Search />
+      <Info />
+      <User />
+      <Repos />
     </main>
   );
 };
