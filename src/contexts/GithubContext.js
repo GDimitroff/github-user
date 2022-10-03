@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import axios from 'axios';
 
 import mockUser from '../mockData/mockUser';
@@ -22,19 +22,33 @@ const GithubContextProvider = ({ children }) => {
     setIsLoading(true);
 
     try {
-      const response = await axios.get(`${rootUrl}/users/${user}`);
-      setGithubUser(response.data);
+      const userResponse = await axios.get(`${rootUrl}/users/${user}`);
+      setGithubUser(userResponse.data);
+
+      const { repos_url, followers_url } = userResponse.data;
+      const [reposResponse, followerResponse] = await Promise.allSettled([
+        axios.get(`${repos_url}?per_page=100`),
+        axios.get(`${followers_url}?per_page=100`),
+      ]);
+
+      if (reposResponse.status === 'fulfilled') {
+        setRepos(reposResponse.value.data);
+      }
+
+      if (followerResponse.status === 'fulfilled') {
+        setFollowers(followerResponse.value.data);
+      }
+
       checkRequests();
       setIsLoading(false);
     } catch (error) {
-      console.error(error);
-      checkRequests();
-      toggleError(true, 'There is no user with that username!');
+      console.log(error);
+      toggleError(true, error.response?.data?.message || error.message);
       setIsLoading(false);
     }
   };
 
-  const checkRequests = async () => {
+  const checkRequests = useCallback(async () => {
     try {
       const { data } = await axios.get(`${rootUrl}/rate_limit`);
       let {
@@ -49,7 +63,7 @@ const GithubContextProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, []);
 
   const toggleError = (show = false, msg = '') => {
     setError({ show, msg });
@@ -57,7 +71,7 @@ const GithubContextProvider = ({ children }) => {
 
   useEffect(() => {
     checkRequests();
-  }, []);
+  }, [checkRequests]);
 
   return (
     <GithubContext.Provider
