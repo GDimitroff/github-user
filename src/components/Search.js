@@ -5,14 +5,14 @@ import { MdSearch } from 'react-icons/md';
 import { useGitHub } from '../contexts/GithubContext';
 
 const Search = () => {
+  const { requests, error, searchGithubUser } = useGitHub();
   const [user, setUser] = useState('');
-  const { requests, error } = useGitHub();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (user) {
-      console.log('user');
+      searchGithubUser(user);
     }
   };
 
@@ -36,7 +36,7 @@ const Search = () => {
             <button type="submit">Search</button>
           </div>
         </form>
-        <h3>Requests: {requests} / 60</h3>
+        <h3>Requests: {60 - requests} / 60</h3>
       </Wrapper>
     </section>
   );
@@ -125,10 +125,8 @@ const Wrapper = styled.div`
 const ErrorWrapper = styled.article`
   position: absolute;
   width: 90vw;
-  top: 0;
+  top: -25px;
   left: 0;
-  bottom: 20px;
-  transform: translateY(-100%);
 
   p {
     font-size: 1.2rem;
