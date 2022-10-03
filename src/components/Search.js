@@ -2,8 +2,11 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { MdSearch } from 'react-icons/md';
 
+import { useGitHub } from '../contexts/GithubContext';
+
 const Search = () => {
   const [user, setUser] = useState('');
+  const { requests, error } = useGitHub();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,6 +19,11 @@ const Search = () => {
   return (
     <section className="section">
       <Wrapper className="section-center">
+        {error.show && (
+          <ErrorWrapper>
+            <p>{error.msg}</p>
+          </ErrorWrapper>
+        )}
         <form onSubmit={handleSubmit}>
           <div className="form-control">
             <MdSearch />
@@ -28,7 +36,7 @@ const Search = () => {
             <button type="submit">Search</button>
           </div>
         </form>
-        <h3>Request: 60 / 60</h3>
+        <h3>Requests: {requests} / 60</h3>
       </Wrapper>
     </section>
   );
@@ -119,10 +127,11 @@ const ErrorWrapper = styled.article`
   width: 90vw;
   top: 0;
   left: 0;
+  bottom: 20px;
   transform: translateY(-100%);
-  text-transform: capitalize;
 
   p {
+    font-size: 1.2rem;
     color: red;
     letter-spacing: var(--spacing);
   }

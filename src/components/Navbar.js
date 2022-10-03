@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 const Navbar = () => {
-  return <h2>navbar component</h2>;
+  return <Wrapper>navbar component</Wrapper>;
 };
 
 const Wrapper = styled.nav`
   padding: 1.5rem;
-  margin-bottom: 4rem;
+  margin-bottom: 5rem;
   background: var(--color-white);
   text-align: center;
   display: grid;
