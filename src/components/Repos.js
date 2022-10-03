@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useGitHub } from '../contexts/GithubContext';
-
-import { Pie3D, Column3D, Bar3D, Doughnut2D } from './Charts';
+import Pie from './Charts/Pie';
+import Doughnut from './Charts/Doughnut';
 
 const Repos = () => {
   const { repos } = useGitHub();
@@ -38,9 +38,9 @@ const Repos = () => {
   return (
     <section className="section">
       <Wrapper className="section-center ">
-        <Pie3D data={mostUsed} />
+        <Pie data={mostUsed} />
         <div></div>
-        <Doughnut2D data={mostPopular} />
+        <Doughnut data={mostPopular} />
         <div></div>
       </Wrapper>
     </section>
