@@ -14,27 +14,27 @@ const Navbar = () => {
   };
 
   return (
-    <Wrapper>
-      <div className="left">
-        <img src={user.photoURL} alt="Profile" referrerPolicy="no-referrer" />
-        <h4>
-          Welcome, <strong>{user.displayName.toUpperCase()}</strong>
-        </h4>
-      </div>
-      <button onClick={logout}>logout</button>
-    </Wrapper>
+    <nav className="nav">
+      <Wrapper className="section section-center">
+        <div className="left">
+          <img src={user.photoURL} alt="Profile" referrerPolicy="no-referrer" />
+          <h4>
+            Welcome, <strong>{user.displayName.toUpperCase()}</strong>
+          </h4>
+        </div>
+        <button onClick={logout}>logout</button>
+      </Wrapper>
+    </nav>
   );
 };
 
-const Wrapper = styled.nav`
-  padding: 2rem 3rem;
-  margin-bottom: 5rem;
-  background: var(--color-white);
-  display: grid;
-  grid-template-columns: auto 100px;
+const Wrapper = styled.div`
+  padding: 2rem 0;
+  margin-bottom: 4rem;
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
 
   .left {
     display: flex;

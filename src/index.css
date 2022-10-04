@@ -185,6 +185,10 @@ p {
   }
 }
 
+.nav {
+  background: var(--color-white);
+}
+
 .loading {
   position: absolute;
   top: 50%;
