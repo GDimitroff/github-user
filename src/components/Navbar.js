@@ -1,23 +1,49 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useAuth } from '../context/AuthContext';
 
 const Navbar = () => {
-  return <Wrapper>navbar component</Wrapper>;
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/login', { replace: true });
+  };
+
+  return (
+    <Wrapper>
+      <div className="left">
+        <img src={user.photoURL} alt="Profile" referrerPolicy="no-referrer" />
+        <h4>
+          Welcome, <strong>{user.displayName.toUpperCase()}</strong>
+        </h4>
+      </div>
+      <button onClick={handleLogout}>logout</button>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.nav`
-  padding: 1.5rem;
+  padding: 2rem 3rem;
   margin-bottom: 5rem;
   background: var(--color-white);
-  text-align: center;
   display: grid;
-  grid-template-columns: auto auto 100px;
-  justify-content: center;
+  grid-template-columns: auto 100px;
+  justify-content: space-between;
   align-items: center;
-  gap: 1.5rem;
+  gap: 2rem;
+
+  .left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
 
   h4 {
-    margin-bottom: 0;
+    font-size: 1.6rem;
     font-weight: 400;
+    margin-bottom: 0;
   }
 
   img {
@@ -30,7 +56,7 @@ const Wrapper = styled.nav`
   button {
     background: transparent;
     border: transparent;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     text-transform: capitalize;
     letter-spacing: var(--spacing);
     color: var(--color-grey-5);

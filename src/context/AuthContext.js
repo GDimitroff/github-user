@@ -38,12 +38,9 @@ const AuthContextProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  return (
-    <AuthContext.Provider
-      value={{ signInWithGoogle, logout, user, signOut, loading }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  const values = { signInWithGoogle, logout, user, signOut, loading };
+
+  return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => {
