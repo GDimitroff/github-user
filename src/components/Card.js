@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { MdBusiness, MdLocationOn, MdLink } from 'react-icons/md';
-
 import { useGitHub } from '../context/GithubContext';
 
 const Card = () => {

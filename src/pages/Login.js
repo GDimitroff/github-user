@@ -1,22 +1,28 @@
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-
+import { Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 import loginImg from '../images/login-img.svg';
+import loadingImage from '../images/preloader.gif';
 
 const Login = () => {
-  const { signInWithGoogle } = useAuth();
-  const navigate = useNavigate();
+  const { user, loading, signInWithGoogle } = useAuth();
 
   const handleLogin = async () => {
     try {
       await signInWithGoogle();
-      navigate('/');
     } catch (error) {
       console.log(error);
     }
   };
+
+  if (loading) {
+    return <img src={loadingImage} alt="Loading" className="loading" />;
+  }
+
+  if (user) {
+    return <Navigate to="/" replace={true} />;
+  }
 
   return (
     <Wrapper>

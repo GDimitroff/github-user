@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-
 import { useGitHub } from '../context/GithubContext';
 import { Column, Pie, Doughnut, Bar } from './Charts';
 

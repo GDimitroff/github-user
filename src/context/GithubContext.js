@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
 import axios from 'axios';
+import { useAuth } from './AuthContext';
 
 import mockUser from '../mockData/mockUser';
 import mockRepos from '../mockData/mockRepos';
 import mockFollowers from '../mockData/mockFollowers';
-import { useAuth } from './AuthContext';
 
 const rootUrl = 'https://api.github.com';
 

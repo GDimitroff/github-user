@@ -1,8 +1,6 @@
 import styled from 'styled-components';
-import axios from 'axios';
 import { GoRepo, GoGist } from 'react-icons/go';
 import { FiUsers, FiUserPlus } from 'react-icons/fi';
-
 import { useGitHub } from '../context/GithubContext';
 
 const UserInfo = () => {

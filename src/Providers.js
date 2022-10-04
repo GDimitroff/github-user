@@ -1,5 +1,4 @@
 import { BrowserRouter as Router } from 'react-router-dom';
-
 import GithubContextProvider from './context/GithubContext';
 import AuthContextProvider from './context/AuthContext';
 
