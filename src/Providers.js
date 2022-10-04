@@ -1,14 +1,15 @@
 import { BrowserRouter as Router } from 'react-router-dom';
-import GithubContextProvider from './contexts/GithubContext';
+
+import GithubContextProvider from './context/GithubContext';
+import AuthContextProvider from './context/AuthContext';
 
 const Providers = ({ children }) => {
-  //TODO: Add auth provider
   return (
-    <GithubContextProvider>
-      {/* <AuthProvider> */}
-      <Router>{children}</Router>
-      {/* </AuthProvider> */}
-    </GithubContextProvider>
+    <AuthContextProvider>
+      <GithubContextProvider>
+        <Router>{children}</Router>
+      </GithubContextProvider>
+    </AuthContextProvider>
   );
 };
 
