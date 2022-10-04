@@ -1,4 +1,4 @@
-import { useGitHub } from '../contexts/GithubContext';
+import { useGitHub } from '../context/GithubContext';
 import { Info, Repos, User, Search, Navbar } from '../components';
 import loadingImage from '../images/preloader.gif';
 

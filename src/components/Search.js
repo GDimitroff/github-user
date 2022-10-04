@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { MdSearch } from 'react-icons/md';
 
-import { useGitHub } from '../contexts/GithubContext';
+import { useGitHub } from '../context/GithubContext';
 
 const Search = () => {
   const { requests, error, searchGithubUser } = useGitHub();

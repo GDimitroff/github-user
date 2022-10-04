@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { useGitHub } from '../contexts/GithubContext';
+import { useGitHub } from '../context/GithubContext';
 import { Column, Pie, Doughnut, Bar } from './Charts';
 
 const Repos = () => {

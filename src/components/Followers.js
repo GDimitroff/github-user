@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { useGitHub } from '../contexts/GithubContext';
+import { useGitHub } from '../context/GithubContext';
 
 const Followers = () => {
   const { followers } = useGitHub();
