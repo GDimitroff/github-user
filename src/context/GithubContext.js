@@ -4,6 +4,7 @@ import axios from 'axios';
 import mockUser from '../mockData/mockUser';
 import mockRepos from '../mockData/mockRepos';
 import mockFollowers from '../mockData/mockFollowers';
+import { useAuth } from './AuthContext';
 
 const rootUrl = 'https://api.github.com';
 
@@ -16,6 +17,10 @@ const GithubContextProvider = ({ children }) => {
   const [requests, setRequests] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState({ show: false, msg: '' });
+
+  // TODO: think about initial state
+  const { user } = useAuth();
+  console.log(user);
 
   const searchGithubUser = async (user) => {
     toggleError();
