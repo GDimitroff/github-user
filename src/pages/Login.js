@@ -1,20 +1,15 @@
 import styled from 'styled-components';
 import { Navigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { useSignInWithGithub } from 'react-firebase-hooks/auth';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../firebase';
 
 import loginImg from '../images/login-img.svg';
 import loadingImage from '../images/preloader.gif';
 
 const Login = () => {
-  const { user, loading, signInWithGoogle } = useAuth();
-
-  const handleLogin = async () => {
-    try {
-      await signInWithGoogle();
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const [user, loading] = useAuthState(auth);
+  const [signInWithGithub] = useSignInWithGithub(auth);
 
   if (loading) {
     return <img src={loadingImage} alt="Loading" className="loading" />;
@@ -29,8 +24,8 @@ const Login = () => {
       <div className="container">
         <img src={loginImg} alt="github user" />
         <h1>GitHub User</h1>
-        <button className="btn" onClick={handleLogin}>
-          Login
+        <button className="btn" onClick={() => signInWithGithub()}>
+          Sign in with Github
         </button>
       </div>
     </Wrapper>

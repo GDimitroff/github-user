@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
 import axios from 'axios';
-import { useAuth } from './AuthContext';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../firebase';
 
 import mockUser from '../mockData/mockUser';
 import mockRepos from '../mockData/mockRepos';
@@ -11,6 +12,7 @@ const rootUrl = 'https://api.github.com';
 const GithubContext = React.createContext();
 
 const GithubContextProvider = ({ children }) => {
+  const [user, loading] = useAuthState(auth);
   const [githubUser, setGithubUser] = useState(mockUser);
   const [repos, setRepos] = useState(mockRepos);
   const [followers, setFollowers] = useState(mockFollowers);
@@ -19,7 +21,6 @@ const GithubContextProvider = ({ children }) => {
   const [error, setError] = useState({ show: false, msg: '' });
 
   // TODO: think about initial state
-  const { user } = useAuth();
   console.log(user);
 
   const searchGithubUser = async (user) => {

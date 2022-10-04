@@ -1,13 +1,15 @@
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { useAuth } from '../context/AuthContext';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
+import { signOut } from 'firebase/auth';
+import { auth } from '../firebase';
 
 const Navbar = () => {
-  const { user, logout } = useAuth();
+  const [user] = useAuthState(auth);
   const navigate = useNavigate();
 
-  const handleLogout = async () => {
-    await logout();
+  const logout = () => {
+    signOut(auth);
     navigate('/login', { replace: true });
   };
 
@@ -19,7 +21,7 @@ const Navbar = () => {
           Welcome, <strong>{user.displayName.toUpperCase()}</strong>
         </h4>
       </div>
-      <button onClick={handleLogout}>logout</button>
+      <button onClick={logout}>logout</button>
     </Wrapper>
   );
 };
