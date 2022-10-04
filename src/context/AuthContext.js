@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import {
   signInWithPopup,
+  signInWithRedirect,
   onAuthStateChanged,
   GoogleAuthProvider,
   signOut,
@@ -15,6 +16,11 @@ const AuthContextProvider = ({ children }) => {
 
   const signInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
+
+    if (window.innerWidth <= 640) {
+      return signInWithRedirect(auth, provider);
+    }
+
     return signInWithPopup(auth, provider);
   };
 
