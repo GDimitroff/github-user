@@ -3,56 +3,19 @@ import axios from 'axios';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
 
-import mockUser from '../mockData/mockUser';
-import mockRepos from '../mockData/mockRepos';
-import mockFollowers from '../mockData/mockFollowers';
-
 const rootUrl = 'https://api.github.com';
 
 const GithubContext = React.createContext();
 
 const GithubContextProvider = ({ children }) => {
-  const [user, loading] = useAuthState(auth);
-  const [githubUser, setGithubUser] = useState(mockUser);
-  const [repos, setRepos] = useState(mockRepos);
-  const [followers, setFollowers] = useState(mockFollowers);
+  const [user] = useAuthState(auth);
+
+  const [githubUser, setGithubUser] = useState(null);
+  const [repos, setRepos] = useState([]);
+  const [followers, setFollowers] = useState([]);
   const [requests, setRequests] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState({ show: false, msg: '' });
-
-  // TODO: think about initial state
-  console.log(user);
-
-  const searchGithubUser = async (user) => {
-    toggleError();
-    setIsLoading(true);
-
-    try {
-      const userResponse = await axios.get(`${rootUrl}/users/${user}`);
-      setGithubUser(userResponse.data);
-
-      const { repos_url, followers_url } = userResponse.data;
-      const [reposResponse, followerResponse] = await Promise.allSettled([
-        axios.get(`${repos_url}?per_page=100`),
-        axios.get(`${followers_url}?per_page=100`),
-      ]);
-
-      if (reposResponse.status === 'fulfilled') {
-        setRepos(reposResponse.value.data);
-      }
-
-      if (followerResponse.status === 'fulfilled') {
-        setFollowers(followerResponse.value.data);
-      }
-
-      checkRequests();
-      setIsLoading(false);
-    } catch (error) {
-      console.log(error);
-      toggleError(true, error.response?.data?.message || error.message);
-      setIsLoading(false);
-    }
-  };
 
   const checkRequests = useCallback(async () => {
     try {
@@ -71,13 +34,49 @@ const GithubContextProvider = ({ children }) => {
     }
   }, []);
 
+  const searchGithubUser = useCallback(
+    async (user) => {
+      toggleError();
+      setIsLoading(true);
+
+      try {
+        const response = await axios.get(`${rootUrl}/users/${user}`);
+        setGithubUser(response.data);
+
+        const { repos_url, followers_url } = response.data;
+        const [repos, followers] = await Promise.allSettled([
+          axios.get(`${repos_url}?per_page=100`),
+          axios.get(`${followers_url}?per_page=100`),
+        ]);
+
+        if (repos.status === 'fulfilled') {
+          setRepos(repos.value.data);
+        }
+
+        if (followers.status === 'fulfilled') {
+          setFollowers(followers.value.data);
+        }
+
+        checkRequests();
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+        toggleError(true, error.response?.data?.message || error.message);
+        setIsLoading(false);
+      }
+    },
+    [checkRequests]
+  );
+
   const toggleError = (show = false, msg = '') => {
     setError({ show, msg });
   };
 
   useEffect(() => {
-    checkRequests();
-  }, [checkRequests]);
+    if (!user) return;
+
+    searchGithubUser(user?.reloadUserInfo?.screenName);
+  }, [user, searchGithubUser]);
 
   return (
     <GithubContext.Provider

@@ -8,7 +8,6 @@ const Dashboard = () => {
   if (isLoading) {
     return (
       <main>
-        <Navbar />
         <img src={loadingImage} alt="Loading" className="loading" />
       </main>
     );
