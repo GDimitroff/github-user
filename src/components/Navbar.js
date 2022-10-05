@@ -43,9 +43,15 @@ const Wrapper = styled.div`
   }
 
   h4 {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 400;
     margin-bottom: 0;
+  }
+
+  @media (min-width: 440px) {
+    h4 {
+      font-size: 1.6rem;
+    }
   }
 
   img {

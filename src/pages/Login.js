@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { useSignInWithGithub } from 'react-firebase-hooks/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
+import { FiGithub } from 'react-icons/fi';
 
 import loginImg from '../images/login-img.svg';
 import loadingImage from '../images/preloader.gif';
@@ -24,9 +25,12 @@ const Login = () => {
       <div className="container">
         <img src={loginImg} alt="github user" />
         <h1>GitHub User</h1>
-        <button className="btn" onClick={() => signInWithGithub()}>
-          Sign in with Github
-        </button>
+        <div className="action">
+          <button onClick={() => signInWithGithub()} className="github-btn">
+            <FiGithub className="icon" />
+            Sign in with GitHub
+          </button>
+        </div>
       </div>
     </Wrapper>
   );
@@ -48,7 +52,40 @@ const Wrapper = styled.section`
   }
 
   h1 {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  button {
+    font-family: inherit;
+    text-transform: uppercase;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: var(--radius);
+    background-color: var(--color-white);
+    box-shadow: var(--light-shadow);
+    transition: var(--transition);
+    cursor: pointer;
+  }
+
+  button:hover,
+  button:active {
+    box-shadow: var(--dark-shadow);
+    color: var(--color-white);
+    background-color: var(--color-grey-4);
+  }
+
+  .icon {
+    font-size: 1.8rem;
   }
 `;
 

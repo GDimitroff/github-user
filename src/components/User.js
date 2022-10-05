@@ -16,10 +16,12 @@ const User = () => {
 
 const Wrapper = styled.div`
   padding-top: 2rem;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 5rem;
 
-  @media (min-width: 992px) {
+  @media (min-width: 800px) {
+    display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 3rem;
   }
